@@ -33,8 +33,9 @@ class GspreadReader():
     def next(self):
         if len(self._buffer) == 0:
             s = "{0}{2}:{1}{3}".format(alphabets[0], alphabets[self._header_len - 1], self._last + 1,
-                                       self._last + 1 + self._buffer_len)
+                                       self._last + self._buffer_len)
             self._buffer = self._ws.range(s)
+            self._last += self._buffer_len
         if self._buffer[0] == "":
             raise StopIteration
         ret = (c.value for c in self._buffer[:self._header_len])
