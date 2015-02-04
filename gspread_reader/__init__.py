@@ -36,7 +36,7 @@ class GspreadReader():
                                        self._last + self._buffer_len)
             self._buffer = self._ws.range(s)
             self._last += self._buffer_len
-        if self._buffer[0] == "":
+        if self._buffer[0].value == "":
             raise StopIteration
         ret = (c.value for c in self._buffer[:self._header_len])
         del self._buffer[:self._header_len]
